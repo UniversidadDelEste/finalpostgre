@@ -1,0 +1,28 @@
+﻿-- Function: crear_tcajero()
+
+-- DROP FUNCTION crear_tcajero();
+
+CREATE OR REPLACE FUNCTION crear_tbarrios()
+  RETURNS void AS
+$BODY$
+DECLARE
+
+BEGIN
+    IF NOT EXISTS (SELECT * FROM information_schema.tables WHERE table_name = 'tbarrios') THEN
+
+        execute 'CREATE TABLE tbarrios(
+            barrio text,
+            perimetro text,
+            area text,
+            comuna integer, 
+            lon real,
+            lat real
+       )';
+
+    END IF;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION crear_tcajero()
+  OWNER TO oscar;

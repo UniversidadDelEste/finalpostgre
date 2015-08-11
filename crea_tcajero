@@ -1,0 +1,20 @@
+﻿CREATE OR REPLACE FUNCTION crear_tcajero() RETURNS VOID AS $$
+DECLARE
+
+BEGIN
+    IF NOT EXISTS (SELECT * FROM information_schema.tables WHERE table_name = 'tcajero') THEN
+
+        execute 'CREATE TABLE tcajero(
+            banco text,
+            red text,
+            direccion text,
+            terminales integer, 
+            web text,
+            actualizacion text,
+            lon real,
+            lat real
+       )';
+
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
